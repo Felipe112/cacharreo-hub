@@ -16,8 +16,8 @@ const posts = (await getCollection('blog'))
   <p class="prompt">cd ~/cacharreo</p>
   <h1>Cacharrear es armar cosas que nadie pidió.</h1>
   <p class="lead">
-    Soy Andrés Ceballos. Acá publico proyectos libres, herramientas y
-    experimentos. Todos gratis, todos abiertos, cada uno en su propio subdominio.
+    Soy Andrés Ceballos. Acá reúno los proyectos libres, herramientas y
+    experimentos que voy armando. Todos gratis, todos abiertos.
   </p>
 
   <h2>Proyectos</h2>
@@ -40,7 +40,7 @@ const posts = (await getCollection('blog'))
       <li>
         <a href={`/blog/${post.id}`}>{post.data.title}</a><br />
         <time datetime={post.data.date.toISOString()}>
-          {post.data.date.toLocaleDateString('es-CO', { dateStyle: 'long' })}
+          {post.data.date.toLocaleDateString('es-CO', { dateStyle: 'long', timeZone: 'UTC' })}
         </time>
       </li>
     ))}
