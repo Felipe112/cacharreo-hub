@@ -1,11 +1,10 @@
 # cacharreo-hub
 
-Sitio principal de [cacharreo.dev](https://cacharreo.dev): presentación, índice
-de proyectos, blog y página de donativos.
+Sitio principal de [cacharreo.dev](https://cacharreo.dev)
 
 ## Stack
 
-Astro (estático) → Cloudflare Pages.
+Astro (estático)
 
 ## Desarrollo
 
