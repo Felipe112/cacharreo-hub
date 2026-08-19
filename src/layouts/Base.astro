@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const path = Astro.url.pathname;
+const año = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="/">cacharreo.dev</a>
+        <a href="/" aria-current={path === '/' ? 'page' : undefined}>proyectos</a>
+        <a href="/blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>blog</a>
+        <a href="/apoyar" aria-current={path === '/apoyar' ? 'page' : undefined}>apoyar</a>
+      </nav>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer>
+        <p>Andrés Ceballos &middot; Colombia &middot; {año}</p>
+        <p>
+          <a href="https://github.com/Felipe112">github</a> &middot;
+          <a href="/apoyar">apoyar el trabajo</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

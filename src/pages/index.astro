@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import proyectos from '../data/proyectos.json';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<Base
+  title="cacharreo.dev — proyectos de Andrés Ceballos"
+  description="Cacharreo: proyectos libres, herramientas y experimentos. Cada uno en su propio subdominio."
+>
+  <p class="prompt">cd ~/cacharreo</p>
+  <h1>Cacharrear es armar cosas que nadie pidió.</h1>
+  <p class="lead">
+    Soy Andrés Ceballos. Acá publico proyectos libres, herramientas y
+    experimentos. Todos gratis, todos abiertos, cada uno en su propio subdominio.
+  </p>
+
+  <h2>Proyectos</h2>
+  <ul class="grid">
+    {proyectos.map((p) => (
+      <li class="card">
+        <h3><a href={p.url}>{p.nombre}</a></h3>
+        <p>{p.descripcion}</p>
+        <div class="meta">
+          <span>{p.estado}</span>
+          <a href={p.repo}>código</a>
+        </div>
+      </li>
+    ))}
+  </ul>
+
+  <h2>Últimas entradas</h2>
+  <ul class="posts">
+    {posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.id}`}>{post.data.title}</a><br />
+        <time datetime={post.data.date.toISOString()}>
+          {post.data.date.toLocaleDateString('es-CO', { dateStyle: 'long' })}
+        </time>
+      </li>
+    ))}
+  </ul>
+
+  <div class="apoyar">
+    <h2 style="margin-top:0">Apoyar</h2>
+    <p>
+      Todo lo que hay acá es gratis. Si algo te sirvió, podés aportar para que
+      siga saliendo.
+    </p>
+    <a class="btn" href="/apoyar">Ver cómo apoyar</a>
+  </div>
+</Base>
