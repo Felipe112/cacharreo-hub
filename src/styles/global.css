@@ -287,6 +287,19 @@ footer {
 footer a { color: var(--dim); }
 footer a:hover { color: var(--fg); }
 footer .sep { margin-right: auto; }
+footer .social {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+/* El área táctil se extiende sin mover el ícono de su sitio. */
+footer .social a {
+  display: inline-flex;
+  padding: 0.45rem;
+  margin: -0.45rem;
+  color: var(--dim);
+}
+footer .social a:hover { color: var(--mint); }
 /* La firma ocupa su propia línea bajo el resto del pie. */
 footer .firma {
   flex-basis: 100%;
