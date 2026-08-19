@@ -10,10 +10,10 @@ Astro (estático) → Cloudflare Pages.
 ## Desarrollo
 
 ```bash
-npm install
-npm run dev      # http://localhost:4321
-npm run build    # genera dist/
-npm run preview  # sirve dist/
+pnpm install
+pnpm dev      # http://localhost:4321
+pnpm build    # genera dist/
+pnpm preview  # sirve dist/
 ```
 
 ## Agregar un proyecto al índice
@@ -55,5 +55,5 @@ Con `draft: true` no se publica.
 
 Push a `main` → Cloudflare Pages construye y publica.
 
-- Build command: `npm run build`
+- Build command: `pnpm build`
 - Output directory: `dist`
