@@ -18,18 +18,21 @@ npm run preview  # sirve dist/
 
 ## Agregar un proyecto al índice
 
-Editar `src/data/proyectos.json`:
+El hub solo enlaza. Los proyectos viven en sus propios repos, lenguajes y
+dominios. Para listar uno, editar `src/data/proyectos.json`:
 
 ```json
 {
   "nombre": "Nombre visible",
-  "slug": "slug-del-proyecto",
   "descripcion": "Una línea, qué hace y para quién.",
-  "url": "https://slug-del-proyecto.cacharreo.dev",
-  "repo": "https://github.com/Felipe112/cacharreo-slug-del-proyecto",
+  "url": "https://donde-vive-el-proyecto.com",
+  "repo": "https://github.com/Felipe112/repo",
   "estado": "activo"
 }
 ```
+
+`nombre`, `descripcion` y `url` son obligatorios. `repo` y `estado` son
+opcionales: si faltan, no se muestran.
 
 ## Escribir una entrada del blog
 

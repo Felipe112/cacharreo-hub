@@ -27,8 +27,8 @@ const posts = (await getCollection('blog'))
         <h3><a href={p.url}>{p.nombre}</a></h3>
         <p>{p.descripcion}</p>
         <div class="meta">
-          <span>{p.estado}</span>
-          <a href={p.repo}>código</a>
+          {p.estado && <span>{p.estado}</span>}
+          {p.repo && <a href={p.repo}>código</a>}
         </div>
       </li>
     ))}

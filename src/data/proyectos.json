@@ -1,10 +1,9 @@
 [
   {
     "nombre": "Ejemplo",
-    "slug": "ejemplo",
     "descripcion": "Reemplaza esta entrada por tu primer proyecto real.",
-    "url": "https://ejemplo.cacharreo.dev",
-    "repo": "https://github.com/Felipe112/cacharreo-ejemplo",
+    "url": "https://ejemplo.com",
+    "repo": "https://github.com/Felipe112/ejemplo",
     "estado": "activo"
   }
 ]
