@@ -1,0 +1,39 @@
+---
+/* Íconos de las tarjetas de proyecto. Trazo, rejilla de 24px.
+   `variant` rota entre las tres formas según la posición en la lista. */
+interface Props {
+  variant: number;
+}
+
+const { variant } = Astro.props;
+const colores = ['#7BE0AE', '#F08C78', '#A3ADC6'];
+const fondos = [
+  'rgba(123, 224, 174, 0.16)',
+  'rgba(240, 140, 120, 0.16)',
+  'rgba(163, 173, 198, 0.14)',
+];
+const i = variant % 3;
+---
+
+<div class="icon" style={`background: ${fondos[i]}`}>
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={colores[i]}
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    {i === 0 && <path d="M4 7h16M4 12h16M4 17h10" />}
+    {i === 1 && <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" />}
+    {i === 2 && (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path d="M12 8v4l3 2" />
+      </>
+    )}
+  </svg>
+</div>

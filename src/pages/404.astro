@@ -3,10 +3,16 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base title="404 — cacharreo.dev" description="Esta página no existe.">
-  <p class="prompt">ls: no such file or directory</p>
-  <h1>404</h1>
-  <p class="lead">
-    Esta página no existe, o existía y la moví. Pasa cuando uno cacharrea.
-  </p>
-  <p><a href="/">Volver al inicio</a> &middot; <a href="/blog">Ver el blog</a></p>
+  <div class="hero">
+    <span class="badge">Error 404</span>
+    <h1>Esta página no <span class="em">existe</span>.</h1>
+    <p class="lead">
+      O existía y la moví. Pasa cuando uno cacharrea.
+    </p>
+  </div>
+
+  <div class="apoyar">
+    <p>¿Buscabas algo puntual?</p>
+    <a class="btn" href="/">Volver al inicio</a>
+  </div>
 </Base>

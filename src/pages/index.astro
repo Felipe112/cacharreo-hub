@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import ProjectIcon from '../components/ProjectIcon.astro';
 import { getCollection } from 'astro:content';
 import proyectos from '../data/proyectos.json';
 
@@ -11,19 +12,23 @@ const posts = (await getCollection('blog'))
 
 <Base
   title="cacharreo.dev — proyectos de Andrés Ceballos"
-  description="Cacharreo: proyectos libres, herramientas y experimentos. Cada uno en su propio subdominio."
+  description="Cacharreo: proyectos libres, herramientas y experimentos. Todos gratis, todos abiertos."
 >
-  <p class="prompt">cd ~/cacharreo</p>
-  <h1>Cacharrear es armar cosas que nadie pidió.</h1>
-  <p class="lead">
-    Soy Andrés Ceballos. Acá reúno los proyectos libres, herramientas y
-    experimentos que voy armando. Todos gratis, todos abiertos.
-  </p>
+  <div class="hero">
+    <span class="badge">Andrés Ceballos · Colombia</span>
+    <h1>Cacharrear es armar cosas que <span class="em">nadie pidió</span>.</h1>
+    <p class="lead">
+      Acá reúno los proyectos libres, herramientas y experimentos que voy
+      armando. Todos gratis, todos abiertos.
+    </p>
+  </div>
 
-  <h2>Proyectos</h2>
+  <div class="rule"><h2>Proyectos</h2></div>
+
   <ul class="grid">
-    {proyectos.map((p) => (
+    {proyectos.map((p, i) => (
       <li class="card">
+        <ProjectIcon variant={i} />
         <h3><a href={p.url}>{p.nombre}</a></h3>
         <p>{p.descripcion}</p>
         <div class="meta">
@@ -32,26 +37,28 @@ const posts = (await getCollection('blog'))
         </div>
       </li>
     ))}
+    <li class="card next">+ el que sigue</li>
   </ul>
 
-  <h2>Últimas entradas</h2>
+  <div class="rule"><h2>Escritos</h2></div>
+
   <ul class="posts">
     {posts.map((post) => (
       <li>
-        <a href={`/blog/${post.id}`}>{post.data.title}</a><br />
         <time datetime={post.data.date.toISOString()}>
-          {post.data.date.toLocaleDateString('es-CO', { dateStyle: 'long', timeZone: 'UTC' })}
+          {post.data.date.toLocaleDateString('es-CO', { dateStyle: 'short', timeZone: 'UTC' })}
         </time>
+        <a href={`/blog/${post.id}`}>{post.data.title}</a>
       </li>
     ))}
   </ul>
 
   <div class="apoyar">
-    <h2 style="margin-top:0">Apoyar</h2>
+    <h2>Apoyar el cacharreo</h2>
     <p>
-      Todo lo que hay acá es gratis. Si algo te sirvió, podés aportar para que
-      siga saliendo.
+      Todo es gratis y va a seguir siéndolo. Si algo te sirvió, un aporte ayuda
+      a que salgan más.
     </p>
-    <a class="btn" href="/apoyar">Ver cómo apoyar</a>
+    <a class="btn" href="/apoyar">Aportar</a>
   </div>
 </Base>

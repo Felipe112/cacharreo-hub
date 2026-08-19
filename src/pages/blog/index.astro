@@ -8,17 +8,18 @@ const posts = (await getCollection('blog'))
 ---
 
 <Base title="Blog — cacharreo.dev" description="Notas sobre los proyectos: qué funcionó, qué no y qué aprendí.">
-  <p class="prompt">ls ~/cacharreo/blog</p>
-  <h1>Blog</h1>
-  <p class="lead">Notas sobre el proceso. Qué funcionó, qué no, y qué aprendí en el intento.</p>
+  <div class="hero">
+    <h1>Blog</h1>
+    <p class="lead">Notas sobre el proceso. Qué funcionó, qué no, y qué aprendí en el intento.</p>
+  </div>
 
   <ul class="posts">
     {posts.map((post) => (
       <li>
-        <a href={`/blog/${post.id}`}>{post.data.title}</a><br />
         <time datetime={post.data.date.toISOString()}>
-          {post.data.date.toLocaleDateString('es-CO', { dateStyle: 'long', timeZone: 'UTC' })}
+          {post.data.date.toLocaleDateString('es-CO', { dateStyle: 'short', timeZone: 'UTC' })}
         </time>
+        <a href={`/blog/${post.id}`}>{post.data.title}</a>
       </li>
     ))}
   </ul>
