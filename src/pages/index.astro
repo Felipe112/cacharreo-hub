@@ -46,7 +46,7 @@ const posts = (await getCollection('blog'))
     {posts.map((post) => (
       <li>
         <time datetime={post.data.date.toISOString()}>
-          {post.data.date.toLocaleDateString('es-CO', { dateStyle: 'short', timeZone: 'UTC' })}
+          {post.data.date.toLocaleDateString('es', { dateStyle: 'short', timeZone: 'UTC' })}
         </time>
         <a href={`/blog/${post.id}`}>{post.data.title}</a>
       </li>
