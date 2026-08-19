@@ -287,6 +287,12 @@ footer {
 footer a { color: var(--dim); }
 footer a:hover { color: var(--fg); }
 footer .sep { margin-right: auto; }
+/* La firma ocupa su propia línea bajo el resto del pie. */
+footer .firma {
+  flex-basis: 100%;
+  color: var(--faint);
+  padding-top: 0.5rem;
+}
 
 /* Prosa de las entradas */
 article { padding-bottom: 2rem; }
