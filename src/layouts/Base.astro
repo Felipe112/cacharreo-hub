@@ -22,6 +22,7 @@ const año = new Date().getFullYear();
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="alternate" type="application/rss+xml" title="cacharreo.dev" href="/rss.xml" />
   </head>
   <body>
     <div class="wrap">
@@ -40,6 +41,7 @@ const año = new Date().getFullYear();
         <p>Andrés Ceballos &middot; Colombia &middot; {año}</p>
         <p>
           <a href="https://github.com/Felipe112">github</a> &middot;
+          <a href="/rss.xml">rss</a> &middot;
           <a href="/apoyar">apoyar el trabajo</a>
         </p>
       </footer>
