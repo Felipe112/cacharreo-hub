@@ -278,6 +278,7 @@ footer {
   border-top: 1px solid var(--glass-line-soft);
   padding: 1.4rem 0 2.4rem;
   display: flex;
+  align-items: center;
   gap: 1.15rem;
   flex-wrap: wrap;
   font-family: var(--mono);
