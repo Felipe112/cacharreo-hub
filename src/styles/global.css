@@ -276,10 +276,10 @@ h1 .em { color: var(--mint); }
 
 footer {
   border-top: 1px solid var(--glass-line-soft);
-  padding: 1.4rem 0 2.4rem;
+  padding: 1.1rem 0 1.8rem;
   display: flex;
   align-items: center;
-  gap: 1.15rem;
+  gap: 1rem;
   flex-wrap: wrap;
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -291,13 +291,17 @@ footer .sep { margin-right: auto; }
 footer .social {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 0.15rem;
+  /* Cancela el relleno del último ícono para que su trazo quede a ras
+     del borde del contenedor, alineado con el texto de la izquierda. */
+  margin-right: -0.4rem;
 }
-/* El área táctil se extiende sin mover el ícono de su sitio. */
+/* El relleno da área táctil; el margen negativo vertical evita que
+   engorde la altura de la fila. */
 footer .social a {
   display: inline-flex;
-  padding: 0.45rem;
-  margin: -0.45rem;
+  padding: 0.4rem;
+  margin-block: -0.4rem;
   color: var(--dim);
 }
 footer .social a:hover { color: var(--mint); }
@@ -305,7 +309,7 @@ footer .social a:hover { color: var(--mint); }
 footer .firma {
   flex-basis: 100%;
   color: var(--faint);
-  padding-top: 0.5rem;
+  padding-top: 0.3rem;
 }
 
 /* Prosa de las entradas */
