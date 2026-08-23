@@ -33,11 +33,10 @@ const año = new Date().getFullYear();
   </head>
   <body>
     <div class="wrap">
-      <nav>
+      <nav class="menu" aria-label="Principal">
         <a class="brand" href="/">cacharreo<span>.dev</span></a>
         <a href="/" aria-current={path === '/' ? 'page' : undefined}>proyectos</a>
         <a href="/blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>escritos</a>
-        <a class="cta" href="/apoyar" aria-current={path === '/apoyar' ? 'page' : undefined}>apoyar</a>
       </nav>
 
       <main>
@@ -45,7 +44,7 @@ const año = new Date().getFullYear();
       </main>
 
       <footer>
-        <span class="sep">Andrés F. Ceballos · {año}</span>
+        <span class="nombre">Andrés F. Ceballos · {año}</span>
 
         <nav class="social" aria-label="Perfiles y suscripción">
           <a

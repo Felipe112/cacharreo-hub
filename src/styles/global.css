@@ -26,6 +26,7 @@
   --sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   --mono: 'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
+  --page-top: 4.5rem;
   --wrap: 44rem;
   --r-card: 20px;
   --r-soft: 14px;
@@ -84,8 +85,10 @@ a:hover { color: #A8EDC9; }
   border-radius: 4px;
 }
 
-/* Navegación en píldora */
-nav {
+/* Navegación en píldora.
+   Va por clase, no por etiqueta: el pie tiene su propio <nav> y no debe
+   heredar el fondo, el relleno ni el margen superior de esta píldora. */
+.menu {
   display: flex;
   align-items: center;
   gap: 1.25rem;
@@ -96,25 +99,17 @@ nav {
   background: var(--glass);
   border: 1px solid var(--glass-line);
 }
-nav .brand {
+.menu .brand {
   font-family: var(--mono);
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--fg-strong);
   margin-right: auto;
 }
-nav .brand span { color: var(--mint); }
-nav a { color: var(--muted); font-size: 0.9rem; }
-nav a:hover { color: var(--fg-strong); }
-nav a.cta,
-nav a.cta:hover {
-  color: var(--fg-strong);
-  background: var(--mint-bg);
-  border: 1px solid var(--mint-line);
-  padding: 0.35rem 1rem;
-  border-radius: 999px;
-}
-nav a[aria-current="page"] { color: var(--fg-strong); }
+.menu .brand span { color: var(--mint); }
+.menu a { color: var(--muted); font-size: 0.9rem; }
+.menu a:hover { color: var(--fg-strong); }
+.menu a[aria-current="page"] { color: var(--fg-strong); }
 
 /* Encabezados */
 h1 {
@@ -135,7 +130,7 @@ h1 .em { color: var(--mint); }
   text-wrap: pretty;
 }
 
-.hero { padding: 4.5rem 0 3.5rem; text-align: center; }
+.hero { padding: var(--page-top) 0 3.5rem; text-align: center; }
 .hero h1 { max-width: 14em; margin-inline: auto; }
 .hero .lead { max-width: 30em; margin-inline: auto; }
 
@@ -231,23 +226,24 @@ h1 .em { color: var(--mint); }
   border: 1px solid var(--glass-line-soft);
   border-radius: var(--r-soft);
   padding: 1rem 1.25rem;
-  display: flex;
-  gap: 1.15rem;
+  /* Rejilla y no flex: la columna de la fecha se reserva aunque el escrito no
+     tenga fecha, para que todos los títulos arranquen en el mismo eje. */
+  display: grid;
+  grid-template-columns: 5.75rem 1fr;
+  gap: 0 1.15rem;
   align-items: baseline;
-  flex-wrap: wrap;
 }
 .posts time {
   font-family: var(--mono);
   font-size: 0.75rem;
   color: var(--dim);
-  width: 5.75rem;
-  flex-shrink: 0;
 }
-.posts a { font-size: 1.05rem; color: var(--fg-strong); }
+/* Fijar la columna es lo que sostiene la alineación cuando falta el <time>. */
+.posts a { grid-column: 2; font-size: 1.05rem; color: var(--fg-strong); }
 .posts a:hover { color: var(--mint); }
 
-/* Bloque de apoyo */
-.apoyar {
+/* Aviso destacado */
+.callout {
   border-radius: 24px;
   padding: 2.5rem 2rem;
   margin: 0 0 2.75rem;
@@ -255,14 +251,14 @@ h1 .em { color: var(--mint); }
   background: rgba(123, 224, 174, 0.09);
   border: 1px solid rgba(123, 224, 174, 0.24);
 }
-.apoyar h2 {
+.callout h2 {
   font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: -0.025em;
   color: var(--fg-strong);
   margin: 0 0 0.6rem;
 }
-.apoyar p { margin: 0 auto 1.4rem; color: var(--muted); max-width: 28em; }
+.callout p { margin: 0 auto 1.4rem; color: var(--muted); max-width: 28em; }
 .btn {
   display: inline-block;
   background: var(--mint);
@@ -274,46 +270,66 @@ h1 .em { color: var(--mint); }
 }
 .btn:hover { background: #A8EDC9; color: var(--bg); }
 
+/* Estado vacío de un listado: mismo peso visual que una tarjeta apagada. */
+.vacio {
+  margin: 0 0 3.25rem;
+  padding: 1.5rem;
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  border-radius: var(--r-soft);
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--faint);
+}
+
 footer {
   border-top: 1px solid var(--glass-line-soft);
   padding: 1.1rem 0 1.8rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
   flex-wrap: wrap;
   font-family: var(--mono);
   font-size: 0.75rem;
+  line-height: 1;
   color: var(--dim);
 }
 footer a { color: var(--dim); }
 footer a:hover { color: var(--fg); }
-footer .sep { margin-right: auto; }
+
+/* El nombre y las redes comparten una caja de la misma altura: así el texto
+   y los iconos quedan centrados sobre el mismo eje horizontal, sin depender
+   del interlineado del texto ni del relleno táctil de los iconos. */
+footer .nombre,
 footer .social {
   display: flex;
   align-items: center;
-  gap: 0.15rem;
-  /* Cancela el relleno del último ícono para que su trazo quede a ras
-     del borde del contenedor, alineado con el texto de la izquierda. */
-  margin-right: -0.4rem;
+  height: 1.75rem;
 }
-/* El relleno da área táctil; el margen negativo vertical evita que
-   engorde la altura de la fila. */
+footer .social { gap: 0.15rem; }
+/* El relleno da área táctil de 44px sin engordar la fila; el margen negativo
+   deja el trazo del último ícono a ras del borde, a plomo con el nombre. */
 footer .social a {
   display: inline-flex;
+  align-items: center;
   padding: 0.4rem;
-  margin-block: -0.4rem;
   color: var(--dim);
 }
+/* Saca de la cuenta el relleno del último ícono (0.4rem) y los ~2px que el
+   glifo del RSS deja libres dentro de su viewBox, para que su trazo caiga
+   exactamente sobre el mismo eje vertical que la «A» de la izquierda. */
+footer .social a:last-child { margin-right: -0.55rem; }
 footer .social a:hover { color: var(--mint); }
 /* La firma ocupa su propia línea bajo el resto del pie. */
 footer .firma {
   flex-basis: 100%;
   color: var(--faint);
-  padding-top: 0.3rem;
+  padding-top: 0.5rem;
 }
 
 /* Prosa de las entradas */
-article { padding-bottom: 2rem; }
+article { padding: var(--page-top) 0 2rem; }
 article h1 { text-align: left; }
 article :is(h2, h3) { color: var(--fg-strong); margin-top: 2.5rem; letter-spacing: -0.02em; }
 article p { text-wrap: pretty; }
@@ -332,16 +348,30 @@ article blockquote {
   border-left: 2px solid var(--coral);
   color: var(--muted);
 }
+/* Atribución de una cita. Se alinea con el texto, no con el borde de la barra. */
+.atribucion {
+  margin: -0.9rem 0 0;
+  padding-left: 1.15rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--dim);
+}
+.atribucion cite { font-style: normal; color: var(--faint); }
+
 
 @media (max-width: 640px) {
+  :root { --page-top: 3rem; }
   .grid { grid-template-columns: minmax(0, 1fr); }
-  .hero { padding: 3rem 0 2.5rem; text-align: left; }
+  .hero { padding: var(--page-top) 0 2.5rem; text-align: left; }
   .hero h1, .hero .lead { margin-inline: 0; }
-  nav { gap: 0.9rem 1.1rem; border-radius: 20px; }
-  nav a { padding: 0.35rem 0; min-height: 44px; display: flex; align-items: center; }
-  nav a.cta { padding: 0.35rem 1rem; }
-  .posts time { width: auto; }
-  .apoyar { padding: 2rem 1.25rem; }
+  .menu { gap: 0.9rem 1.1rem; border-radius: 20px; }
+  .menu a { padding: 0.35rem 0; min-height: 44px; display: flex; align-items: center; }
+  /* En móvil la fecha se apila sobre el título: reservar 5.75rem se come el
+     ancho útil. Al ir ambas en la misma columna, la alineación se mantiene
+     con fecha y sin ella. */
+  .posts li { grid-template-columns: minmax(0, 1fr); gap: 0.3rem 0; }
+  .posts a { grid-column: 1; }
+  .callout { padding: 2rem 1.25rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -2,12 +2,13 @@
 import Base from '../layouts/Base.astro';
 import ProjectIcon from '../components/ProjectIcon.astro';
 import { getCollection } from 'astro:content';
-import proyectos from '../data/proyectos.json';
+import { ordenarEscritos } from '../lib/escritos';
 
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+const proyectos = (await getCollection('proyectos')).sort(
+  (a, b) => (a.data.orden ?? Infinity) - (b.data.orden ?? Infinity),
+);
+
+const posts = ordenarEscritos(await getCollection('blog')).slice(0, 3);
 ---
 
 <Base
@@ -16,49 +17,50 @@ const posts = (await getCollection('blog'))
 >
   <div class="hero">
     <span class="badge">Andrés F. Ceballos</span>
-    <h1>Cacharrear es armar cosas que <span class="em">nadie pidió</span>.</h1>
+    <h1>Cacharrear es tener una idea y <span class="em">negarse a dejarla en paz</span>.</h1>
     <p class="lead">
       Acá reúno los proyectos libres, herramientas y experimentos que voy
-      armando.
+      creando.
     </p>
   </div>
 
   <div class="rule"><h2>Proyectos</h2></div>
 
-  <ul class="grid">
-    {proyectos.map((p, i) => (
-      <li class="card">
-        <ProjectIcon variant={i} />
-        <h3><a href={p.url}>{p.nombre}</a></h3>
-        <p>{p.descripcion}</p>
-        <div class="meta">
-          {p.estado && <span>{p.estado}</span>}
-          {p.repo && <a href={p.repo}>código</a>}
-        </div>
-      </li>
-    ))}
-    <li class="card next">+ el que sigue</li>
-  </ul>
+  {proyectos.length > 0 ? (
+    <ul class="grid">
+      {proyectos.map(({ data: p }, i) => (
+        <li class="card">
+          <ProjectIcon variant={i} />
+          <h3><a href={p.url}>{p.nombre}</a></h3>
+          <p>{p.descripcion}</p>
+          <div class="meta">
+            {p.estado && <span>{p.estado}</span>}
+            {p.repo && <a href={p.repo}>código</a>}
+          </div>
+        </li>
+      ))}
+      <li class="card next">+ el que sigue</li>
+    </ul>
+  ) : (
+    <p class="vacio">Todavía no hay nada publicado acá. Está en camino.</p>
+  )}
 
   <div class="rule"><h2>Escritos</h2></div>
 
-  <ul class="posts">
-    {posts.map((post) => (
-      <li>
-        <time datetime={post.data.date.toISOString()}>
-          {post.data.date.toLocaleDateString('es', { dateStyle: 'short', timeZone: 'UTC' })}
-        </time>
-        <a href={`/blog/${post.id}`}>{post.data.title}</a>
-      </li>
-    ))}
-  </ul>
-
-  <div class="apoyar">
-    <h2>Apoyar el cacharreo</h2>
-    <p>
-      Todo es gratis y va a seguir siéndolo. Si algo te sirvió, un aporte ayuda
-      a que salgan más.
-    </p>
-    <a class="btn" href="/apoyar">Aportar</a>
-  </div>
+  {posts.length > 0 ? (
+    <ul class="posts">
+      {posts.map((post) => (
+        <li>
+          {post.data.date && (
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toLocaleDateString('es', { dateStyle: 'short', timeZone: 'UTC' })}
+            </time>
+          )}
+          <a href={`/blog/${post.id}`}>{post.data.title}</a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="vacio">Nada escrito todavía.</p>
+  )}
 </Base>

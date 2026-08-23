@@ -1,9 +1,11 @@
 [
   {
+    "id": "ejemplo",
     "nombre": "Ejemplo",
     "descripcion": "Reemplaza esta entrada por tu primer proyecto real.",
     "url": "https://ejemplo.com",
     "repo": "https://github.com/Felipe112/ejemplo",
-    "estado": "activo"
+    "estado": "activo",
+    "orden": 1
   }
 ]
