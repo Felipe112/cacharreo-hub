@@ -195,6 +195,21 @@ h1 .em { color: var(--mint); }
   justify-content: center;
   margin-bottom: 1rem;
 }
+/* La captura sangra hasta el borde de la tarjeta: el relleno de 1.5rem se
+   cancela con margen negativo, y arriba se redondea igual que la tarjeta.
+   `object-position: top` deja a la vista el encabezado del proyecto, que es
+   la parte que lo identifica. */
+.card .captura {
+  display: block;
+  width: calc(100% + 3rem);
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top center;
+  margin: -1.5rem -1.5rem 1.25rem;
+  border-radius: var(--r-card) var(--r-card) 0 0;
+  border-bottom: 1px solid var(--glass-line);
+}
 .card h3 { margin: 0 0 0.35rem; font-size: 1.1rem; font-weight: 600; }
 .card h3 a { color: var(--fg-strong); }
 .card h3 a:hover { color: var(--mint); }

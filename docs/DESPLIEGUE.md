@@ -11,21 +11,33 @@
 No hay staging permanente: la preview del PR cumple esa función y muere con el
 PR.
 
-## Cloudflare Pages
+## Cloudflare Workers (assets estáticos)
+
+El sitio no corre en Cloudflare Pages sino en un Worker con assets estáticos
+(`cacharreo-hub`). El comportamiento del servidor vive en `wrangler.jsonc`, en
+el repo, no en el panel: así queda versionado y se revisa en el PR.
 
 | Ajuste | Valor |
 |---|---|
 | Build command | `pnpm build` |
-| Output directory | `dist` |
+| Directorio de assets | `dist` (en `wrangler.jsonc`) |
 | Rama de producción | `main` |
 | `NODE_VERSION` | la misma que `.nvmrc` |
 | Variables de entorno | ninguna (el sitio no tiene secretos) |
 
+Dos valores de `assets` no son opcionales:
+
+- `html_handling: "drop-trailing-slash"` — el valor por defecto sirve
+  `/blog/fluir/` y redirige la versión sin barra, que es justo la que emiten
+  el canonical, el sitemap, el RSS y los enlaces internos.
+- `not_found_handling: "404-page"` — sin esto, una ruta inexistente devuelve
+  404 con el cuerpo vacío en vez de `dist/404.html`.
+
 Si algún día hace falta un secreto, no entra al repo: se configura en
 Cloudflare y se documenta aquí qué es y para qué, nunca su valor.
 
-`public/_headers` y `public/_redirects` los interpreta Cloudflare Pages y se
-copian tal cual a `dist/`. Un error de sintaxis ahí **no rompe el build**: se
+`public/_headers` y `public/_redirects` los interpreta Cloudflare y se copian
+tal cual a `dist/`. Un error de sintaxis ahí **no rompe el build**: se
 verifica en la preview antes de mergear.
 
 ## Flujo de trabajo
@@ -92,8 +104,13 @@ Nunca `push --force` a `main`.
 
 ## Dominio y DNS
 
-- `cacharreo.dev` y `www` gestionados en Cloudflare, apuntando al proyecto de
-  Pages. `www` redirige al dominio sin `www` (una sola URL canónica).
+- `cacharreo.dev` y `www` gestionados en Cloudflare. El apex es dominio
+  personalizado del Worker; `www` redirige al apex con 301 mediante una regla
+  de redirección (Reglas → Reglas de redirección), no sirviendo el sitio. Una
+  sola URL canónica.
+- **Always Use HTTPS** activado en SSL/TLS → Edge Certificates. Sin eso el
+  tráfico en claro se sirve tal cual: el HSTS solo protege a quien ya entró
+  por HTTPS antes, nunca a la primera visita.
 - HSTS ya está activo con `max-age=31536000; includeSubDomains`: **cualquier
   subdominio futuro tendrá que servir HTTPS obligatoriamente**. Tenerlo en
   cuenta al montar proyectos en subdominios de `cacharreo.dev`.

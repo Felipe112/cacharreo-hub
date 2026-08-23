@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ProjectIcon from '../components/ProjectIcon.astro';
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { ordenarEscritos } from '../lib/escritos';
 
@@ -30,12 +31,38 @@ const posts = ordenarEscritos(await getCollection('blog')).slice(0, 3);
     <ul class="grid">
       {proyectos.map(({ data: p }, i) => (
         <li class="card">
-          <ProjectIcon variant={i} />
-          <h3><a href={p.url}>{p.nombre}</a></h3>
+          {p.imagen ? (
+            <Image
+              class="captura"
+              src={p.imagen}
+              alt={p.imagenAlt ?? ''}
+              widths={[400, 800]}
+              sizes="(max-width: 640px) 100vw, 22rem"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <ProjectIcon variant={i} />
+          )}
+          <h3>
+            <a
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${p.nombre} (abre en una pestaña nueva)`}
+            >{p.nombre}</a>
+          </h3>
           <p>{p.descripcion}</p>
           <div class="meta">
             {p.estado && <span>{p.estado}</span>}
-            {p.repo && <a href={p.repo}>código</a>}
+            {p.repo && (
+              <a
+                href={p.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Código de ${p.nombre} (abre en una pestaña nueva)`}
+              >código</a>
+            )}
           </div>
         </li>
       ))}
