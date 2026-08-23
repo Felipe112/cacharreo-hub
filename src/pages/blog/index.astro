@@ -1,10 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { ordenarEscritos } from '../../lib/escritos';
 
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = ordenarEscritos(await getCollection('blog'));
 ---
 
 <Base
@@ -19,14 +18,20 @@ const posts = (await getCollection('blog'))
     </p>
   </div>
 
-  <ul class="posts">
-    {posts.map((post) => (
-      <li>
-        <time datetime={post.data.date.toISOString()}>
-          {post.data.date.toLocaleDateString('es', { dateStyle: 'short', timeZone: 'UTC' })}
-        </time>
-        <a href={`/blog/${post.id}`}>{post.data.title}</a>
-      </li>
-    ))}
-  </ul>
+  {posts.length > 0 ? (
+    <ul class="posts">
+      {posts.map((post) => (
+        <li>
+          {post.data.date && (
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toLocaleDateString('es', { dateStyle: 'short', timeZone: 'UTC' })}
+            </time>
+          )}
+          <a href={`/blog/${post.id}`}>{post.data.title}</a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="vacio">Nada escrito todavía.</p>
+  )}
 </Base>
