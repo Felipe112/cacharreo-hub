@@ -69,7 +69,7 @@ Con `draft: true` no se publica.
 
 `date` es opcional. Los escritos con fecha se listan primero, del más nuevo al
 más viejo; los que no la tienen van al final en orden alfabético por título. Si
-no sabés la fecha, dejala afuera en vez de inventar una.
+no sabes la fecha, déjala afuera en vez de inventar una.
 
 Si el escrito cita a alguien más, el texto va en blockquote (`>`) y se agregan
 `autor` y `fuente` al frontmatter. Se renderizan como atribución bajo la cita;
