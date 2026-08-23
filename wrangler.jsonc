@@ -1,0 +1,22 @@
+{
+  // El nombre tiene que coincidir con el Worker que ya existe en Cloudflare.
+  "name": "cacharreo-hub",
+  "compatibility_date": "2026-08-23",
+  "assets": {
+    "directory": "./dist",
+
+    // Astro genera `dist/blog/fluir/index.html` y el valor por defecto
+    // (`auto-trailing-slash`) sirve eso en `/blog/fluir/`, redirigiendo con
+    // 307 la versión sin barra. Pero `astro.config.mjs` fija
+    // `trailingSlash: 'never'` y todo el sitio —canonical, sitemap, RSS y
+    // enlaces internos— emite URLs sin barra final. Sin esto, cada enlace
+    // interno paga un salto y el canonical declara una URL que el servidor
+    // no sirve directo.
+    "html_handling": "drop-trailing-slash",
+
+    // Por defecto una ruta inexistente devuelve un 404 con el cuerpo vacío.
+    // Con esto se sirve `dist/404.html`, que es la página que construye
+    // `src/pages/404.astro`.
+    "not_found_handling": "404-page"
+  }
+}

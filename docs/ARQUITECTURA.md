@@ -41,7 +41,7 @@ propio lenguaje y su propio dominio o subdominio. El hub solo enlaza.
 | Contenido | Content Collections + Zod | Validación en build |
 | Feed | `@astrojs/rss` | Estándar |
 | Mapa del sitio | `@astrojs/sitemap` | SEO |
-| Hosting | Cloudflare Pages | Estático, previews por PR, gratis |
+| Hosting | Cloudflare Workers con assets estáticos | Estático, previews por PR, gratis |
 
 Regla de dependencias: **cada dependencia nueva requiere justificación en el
 PR**. El objetivo es poder abrir este repo dentro de dos años y que `pnpm
@@ -147,7 +147,9 @@ el sitio aún sin tráfico.
 dice «escritos». Se renombran a `/escritos/*` y se deja un redirect 301 desde
 `/blog/*` en `public/_redirects`.
 
-Se fija `trailingSlash: 'never'` en `astro.config.mjs` y **todos** los enlaces
+Se fija `trailingSlash: 'never'` en `astro.config.mjs`, se acompaña con
+`html_handling: "drop-trailing-slash"` en `wrangler.jsonc` —si no, el servidor
+redirige lo contrario de lo que declara el canonical— y **todos** los enlaces
 internos se escriben sin barra final. Hoy el listado enlaza `/blog/<id>` y el
 RSS enlaza `/blog/<id>/`: es la misma página con dos URLs, lo que reparte señal
 de SEO sin motivo.

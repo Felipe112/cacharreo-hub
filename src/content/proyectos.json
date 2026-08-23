@@ -1,11 +1,13 @@
 [
   {
-    "id": "ejemplo",
-    "nombre": "Ejemplo",
-    "descripcion": "Reemplaza esta entrada por tu primer proyecto real.",
-    "url": "https://ejemplo.com",
-    "repo": "https://github.com/Felipe112/ejemplo",
+    "id": "cotizador",
+    "nombre": "Cotizador",
+    "descripcion": "Cotizaciones sin cuenta ni instalación: se llena en pantalla, calcula los totales y exporta un PDF A4.",
+    "url": "https://cotizador.cacharreo.dev",
+    "repo": "https://github.com/Felipe112/cotizador",
     "estado": "activo",
-    "orden": 1
+    "orden": 1,
+    "imagen": "./imagenes/cotizador.png",
+    "imagenAlt": "Plantilla de cotización con tabla de productos, subtotal y total."
   }
 ]
