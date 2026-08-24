@@ -198,7 +198,16 @@ h1 .em { color: var(--mint); }
 /* La captura sangra hasta el borde de la tarjeta: el relleno de 1.5rem se
    cancela con margen negativo, y arriba se redondea igual que la tarjeta.
    `object-position: top` deja a la vista el encabezado del proyecto, que es
-   la parte que lo identifica. */
+   la parte que lo identifica. El enlace envuelve la imagen para que el clic
+   sobre la captura abra el proyecto igual que el clic sobre el título. */
+.card .captura-link {
+  display: block;
+  width: calc(100% + 3rem);
+  margin: -1.5rem -1.5rem 1.25rem;
+  border-radius: var(--r-card) var(--r-card) 0 0;
+  border-bottom: 1px solid var(--glass-line);
+  overflow: hidden;
+}
 .card .captura {
   display: block;
   width: calc(100% + 3rem);
@@ -209,6 +218,19 @@ h1 .em { color: var(--mint); }
   margin: -1.5rem -1.5rem 1.25rem;
   border-radius: var(--r-card) var(--r-card) 0 0;
   border-bottom: 1px solid var(--glass-line);
+}
+/* Dentro del enlace, la imagen ya no necesita el sangrado ni el borde:
+   los aporta el propio enlace. */
+.card .captura-link .captura {
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  border-bottom: 0;
+  transition: opacity 0.2s ease, transform 0.3s ease;
+}
+.card .captura-link:hover .captura {
+  opacity: 0.9;
+  transform: scale(1.02);
 }
 .card h3 { margin: 0 0 0.35rem; font-size: 1.1rem; font-weight: 600; }
 .card h3 a { color: var(--fg-strong); }
