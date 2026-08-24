@@ -32,15 +32,24 @@ const posts = ordenarEscritos(await getCollection('blog')).slice(0, 3);
       {proyectos.map(({ data: p }, i) => (
         <li class="card">
           {p.imagen ? (
-            <Image
-              class="captura"
-              src={p.imagen}
-              alt={p.imagenAlt ?? ''}
-              widths={[400, 800]}
-              sizes="(max-width: 640px) 100vw, 22rem"
-              loading="lazy"
-              decoding="async"
-            />
+            <a
+              class="captura-link"
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <Image
+                class="captura"
+                src={p.imagen}
+                alt={p.imagenAlt ?? ''}
+                widths={[400, 800]}
+                sizes="(max-width: 640px) 100vw, 22rem"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
           ) : (
             <ProjectIcon variant={i} />
           )}
