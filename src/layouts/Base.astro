@@ -9,6 +9,7 @@ interface Props {
 const { title, description } = Astro.props;
 const path = Astro.url.pathname;
 const año = new Date().getFullYear();
+const iconV = '2';
 ---
 
 <!doctype html>
@@ -19,9 +20,15 @@ const año = new Date().getFullYear();
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0D1226" />
+    <link rel="icon" type="image/svg+xml" href={`/favicon.svg?v=${iconV}`} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`/favicon-32x32.png?v=${iconV}`} />
+    <link rel="icon" type="image/png" sizes="16x16" href={`/favicon-16x16.png?v=${iconV}`} />
+    <link rel="icon" href={`/favicon.ico?v=${iconV}`} sizes="any" />
+    <link rel="apple-touch-icon" href={`/apple-touch-icon.png?v=${iconV}`} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL('/logo-512.png', Astro.site)} />
     <link rel="canonical" href={new URL(path, Astro.site)} />
     <link rel="alternate" type="application/rss+xml" title="cacharreo.dev" href="/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,7 +41,15 @@ const año = new Date().getFullYear();
   <body>
     <div class="wrap">
       <nav class="menu" aria-label="Principal">
-        <a class="brand" href="/">cacharreo<span>.dev</span></a>
+        <a class="brand" href="/">
+          <svg class="brand-mark" width="28" height="28" viewBox="4 4 24 24" aria-hidden="true">
+            <path d="M16 7 L23.8 11.5 L23.8 20.5 L16 25 L8.2 20.5 L8.2 11.5 Z" fill="none" stroke="#7BE0AE" stroke-width="3" stroke-linejoin="round" />
+            <line x1="16" y1="7" x2="16" y2="12.7" stroke="#7BE0AE" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="16" y1="19.3" x2="16" y2="25" stroke="#7BE0AE" stroke-width="2.2" stroke-linecap="round" />
+            <rect x="13.5" y="13.5" width="5" height="5" rx="1.2" fill="#7BE0AE" />
+          </svg>
+          cacharreo<span>.dev</span>
+        </a>
         <a href="/" aria-current={path === '/' ? 'page' : undefined}>proyectos</a>
         <a href="/blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>escritos</a>
       </nav>
