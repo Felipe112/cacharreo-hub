@@ -9,5 +9,16 @@
     "orden": 1,
     "imagen": "./imagenes/cotizador.png",
     "imagenAlt": "Plantilla de cotización con tabla de productos, subtotal y total."
+  },
+  {
+    "id": "payment-plan",
+    "nombre": "Plan de Pagos",
+    "descripcion": "Simulador de crédito: calcula cuota, intereses y tasa efectiva, permite abonos extra y exporta el plan a Excel.",
+    "url": "https://felipe112.github.io/payment-plan/",
+    "repo": "https://github.com/Felipe112/payment-plan",
+    "estado": "activo",
+    "orden": 2,
+    "imagen": "./imagenes/payment-plan.png",
+    "imagenAlt": "Simulador de plan de pagos con cuota mensual, intereses y tasa efectiva anual."
   }
 ]
