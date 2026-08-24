@@ -100,6 +100,9 @@ a:hover { color: #A8EDC9; }
   border: 1px solid var(--glass-line);
 }
 .menu .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--mono);
   font-weight: 700;
   font-size: 0.95rem;
@@ -107,6 +110,7 @@ a:hover { color: #A8EDC9; }
   margin-right: auto;
 }
 .menu .brand span { color: var(--mint); }
+.menu .brand-mark { flex-shrink: 0; }
 .menu a { color: var(--muted); font-size: 0.9rem; }
 .menu a:hover { color: var(--fg-strong); }
 .menu a[aria-current="page"] { color: var(--fg-strong); }
