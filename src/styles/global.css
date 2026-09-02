@@ -177,7 +177,7 @@ h1 .em { color: var(--mint); }
 /* Tarjetas de proyecto */
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.9rem;
   padding: 0;
   margin: 0 0 3.5rem;
@@ -399,6 +399,10 @@ article blockquote {
 }
 .atribucion cite { font-style: normal; color: var(--faint); }
 
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 @media (max-width: 640px) {
   :root { --page-top: 3rem; }

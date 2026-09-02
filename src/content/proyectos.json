@@ -20,5 +20,16 @@
     "orden": 2,
     "imagen": "./imagenes/payment-plan.png",
     "imagenAlt": "Simulador de plan de pagos con cuota mensual, intereses y tasa efectiva anual."
+  },
+  {
+    "id": "tutorial-guitar",
+    "nombre": "Tutorial Guitar",
+    "descripcion": "Tutorial para principiantes que quieren iniciar a tocar la guitarra, esta herramienta ayuda a tomar la iniciativa y promover la practica de ejercicios sencillos con los que se pueda iniciar en el mundo de los guitarristas.",
+    "url": "https://tutorial-guitar.cacharreo.dev/",
+    "repo": "https://github.com/Felipe112/tutorial-guitar",
+    "estado": "activo",
+    "orden": 3,
+    "imagen": "./imagenes/tutorial-guitar.png",
+    "imagenAlt": "Pantalla de inicio de Tutorial Guitar con racha, ejercicios completados y plan semanal."
   }
 ]
